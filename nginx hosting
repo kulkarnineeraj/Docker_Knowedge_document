@@ -1,0 +1,18 @@
+Hosting website on nginx server
+
+go to website folder where all website files are located
+
+Use the below docker file 
+
+FROM nginx:1.11-alpine 	
+COPY . /usr/share/nginx/html
+EXPOSE 9090
+CMD ["/bin/sh", "-c", "sed -i 's/listen .*/listen 9090;/g' /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"]
+
+
+Go to /etc/nginx/conf.d and edit default.conf and specify the index.html 
+for editing default.conf using vi default.conf and in location below specify index.html
+location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+
